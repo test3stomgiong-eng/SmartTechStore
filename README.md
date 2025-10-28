@@ -2,7 +2,7 @@
 # Tên cửa hàng SmartTechStore
 
 
-#Cây thư mục
+# Cây thư mục
 SmartTechStore/
 ├── index.php
 ├── config/db.php
