@@ -11,27 +11,37 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = rtrim($path, '/');
 if ($path === '') $path = '/';
 
-// === BƯỚC 1: BỎ QUA FILE TĨNH (CSS, JS, IMG) ===
+// === BỎ QUA FILE TĨNH ===
 $staticPaths = ['/assets', '/uploads', '/favicon.ico'];
 foreach ($staticPaths as $static) {
     if (strpos($path, $static) === 0) {
-        return false; // Nginx sẽ phục vụ file tĩnh
+        return false;
     }
 }
 
-// === BƯỚC 2: ROUTER CHỈ BẮT TRANG ===
+// === ROUTER ===
+$content = null; // Khởi tạo trước
+
 if ($path === '/' || $path === '/home') {
     $content = $root . '/views/page/home.php';
-
-} elseif ($path === '/product-detail') {
+} elseif (strpos($path, '/product-detail') === 0) {
     $content = $root . '/views/page/product-detail.php';
-
-} elseif ($path === '/product-list') {
-    $content = $root . '/views/page/product-list.php';
-
+}elseif (strpos($path, '/product-all') === 0) {
+    $content = $root . '/views/page/all-products.php';
 } else {
     http_response_code(404);
     $content = $root . '/views/page/404.php';
+    // → Không include layout ở đây
 }
 
-require $root . '/views/layouts/main.php';
+// === CHỈ INCLUDE LAYOUT NẾU KHÔNG PHẢI 404 ===
+if ($content && strpos($content, '404.php') === false) {
+    require $root . '/views/layouts/main.php';
+} else {
+    // Trang 404: chỉ include nội dung
+    if ($content && file_exists($content)) {
+        require $content;
+    } else {
+        echo "<h1>404 - Không tìm thấy trang</h1>";
+    }
+}

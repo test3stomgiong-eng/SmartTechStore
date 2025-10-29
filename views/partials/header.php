@@ -23,7 +23,7 @@
         <nav class="bg-white border-bottom shadow-sm">
             <div class="container">
                 <ul class="nav justify-content-center py-2 flex-wrap">
-                    <li class="nav-item"><a href="#" class="nav-link text-dark px-3">Điện thoại</a></li>
+                    <li class="nav-item"><a href="/product-all" class="nav-link text-dark px-3">Điện thoại</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-dark px-3">Laptop</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-dark px-3">Máy tính bảng</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-dark px-3">Đồng hồ thông minh</a></li>
